@@ -121,7 +121,7 @@ export class IDBBlockstore extends BaseBlockstore {
     }
 
     try {
-      return Boolean(await this.db.get(this.location, this.#encode(key)))
+      return Boolean(await this.db.getKey(this.location, this.#encode(key)))
     } catch (err: any) {
       throw Errors.putFailedError(err)
     }
