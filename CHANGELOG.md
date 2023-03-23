@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/ipfs/js-blockstore-idb/compare/v1.0.1...v1.0.2) (2023-03-23)
+
+
+### Dependencies
+
+* update interface-store to 5.x.x ([#2](https://github.com/ipfs/js-blockstore-idb/issues/2)) ([0bc838f](https://github.com/ipfs/js-blockstore-idb/commit/0bc838f082483861bc9ebe4bd0272fc746724ccf))
+
 ## [1.0.1](https://github.com/ipfs/js-blockstore-idb/compare/v1.0.0...v1.0.1) (2023-03-14)
 
 
