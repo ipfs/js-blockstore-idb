@@ -8,8 +8,8 @@ import type { MultibaseCodec } from 'multiformats/bases/interface'
 import { base32upper } from 'multiformats/bases/base32'
 import * as raw from 'multiformats/codecs/raw'
 import * as Digest from 'multiformats/hashes/digest'
-import type { Options, Pair } from 'interface-blockstore'
-import type { AwaitIterable } from 'interface-store'
+import type { Pair } from 'interface-blockstore'
+import type { AbortOptions, AwaitIterable } from 'interface-store'
 
 export interface IDBDatastoreInit {
   /**
@@ -71,13 +71,15 @@ export class IDBBlockstore extends BaseBlockstore {
     this.db?.close()
   }
 
-  async put (key: CID, val: Uint8Array): Promise<void> {
+  async put (key: CID, val: Uint8Array): Promise<CID> {
     if (this.db == null) {
       throw new Error('Blockstore needs to be opened.')
     }
 
     try {
       await this.db.put(this.location, val, this.#encode(key))
+
+      return key
     } catch (err: any) {
       throw Errors.putFailedError(err)
     }
@@ -127,7 +129,7 @@ export class IDBBlockstore extends BaseBlockstore {
     }
   }
 
-  async * getAll (options?: Options): AwaitIterable<Pair> {
+  async * getAll (options?: AbortOptions): AwaitIterable<Pair> {
     if (this.db == null) {
       throw new Error('Blockstore needs to be opened.')
     }
